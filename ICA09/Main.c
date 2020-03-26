@@ -11,8 +11,8 @@ int main(int argc, char** argv)
 	Student* MarksHead = NULL;
 
 	//generate lists
-	BuildListOrderedID(IDHead);
-	BuildListOrderedMarks(MarksHead);
+	IDHead = BuildListOrderedID(IDHead);
+	MarksHead = BuildListOrderedMarks(MarksHead);
 
 	do
 	{
@@ -20,13 +20,13 @@ int main(int argc, char** argv)
 		printf("\nMenu:\n");
 		printf("1.Display list in order of ID's\n");
 		printf("2.Display list in descending order of Marks\n");
-		printf("3.Display the names, marks and rank of a person given the ID (ID should be input)\n");
-		printf("4.Display the names and marks of all person above a thresholdmarks value(the threshold value should be input)\n");
+		printf("3.Display the names, marks and rank of a person given the ID\n");
+		printf("4.Display the names and marks of all person above a threshold marks value\n");
 		printf("5.Exit\n");
 
 		printf("\nChoice: ");
 		//get choice
-		userChoice = scanf_s("%d", &userChoice);
+		scanf_s("%d", &userChoice);
 
 		//perform action
 		switch (userChoice)

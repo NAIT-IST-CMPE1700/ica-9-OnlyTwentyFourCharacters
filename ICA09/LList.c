@@ -6,31 +6,35 @@
 //***************************************
 //Build an ascending order ID list
 //***************************************
-void BuildListOrderedID(Student* head)
+Student* BuildListOrderedID(Student* head)
 {
 	//loop through arrays
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 10; i++)
 	{
-		AddIDItem(head, i);
+		head = AddIDItem(head, i);
 	}
+
+	return head;
 }
 
 //***************************************
 //Build a descending order marks list
 //***************************************
-void BuildListOrderedMarks(Student* head)
+Student* BuildListOrderedMarks(Student* head)
 {
 	//loop through arrays
 	for (int i = 0; i < 10; i++)
 	{
-		AddMarksItem(head, i);
+		head = AddMarksItem(head, i);
 	}
+
+	return head;
 }
 
 //***************************************
 //Add a node to the ordered ID list
 //***************************************
-void AddIDItem(Student* head, int index)
+Student* AddIDItem(Student* head, int index)
 {
 	//create new node
 	Student* temp = (Student*)malloc(sizeof(Student));
@@ -65,12 +69,12 @@ void AddIDItem(Student* head, int index)
 
 	}
 	//belongs later in list
-	else if (temp->ID > head->ID)
+	else if (temp->ID >= head->ID)
 	{
 		current = head;
 
 		//loop until ordered position
-		while (temp->ID > current->ID && current->next != NULL)
+		while (current->next != NULL && temp->ID >= current->next->ID )
 		{
 			current = current->next;
 		}
@@ -86,14 +90,14 @@ void AddIDItem(Student* head, int index)
 			temp->next = current->next;
 			current->next = temp;
 		}
-		
 	}
 
+	return head;
 }
 //***************************************
 //Add a node to the ordered marks list
 //***************************************
-void AddMarksItem(Student* head, int index)
+Student* AddMarksItem(Student* head, int index)
 {
 	//create new node
 	Student* temp = (Student*)malloc(sizeof(Student));
@@ -118,7 +122,7 @@ void AddMarksItem(Student* head, int index)
 		head = temp;
 	}
 	//belongs as first item
-	else if (temp->mark > head->mark)
+	else if (temp->mark >= head->mark)
 	{
 		//save state
 		current = head;
@@ -133,7 +137,7 @@ void AddMarksItem(Student* head, int index)
 		current = head;
 
 		//loop until ordered position
-		while (temp->mark < current->mark && current->next != NULL)
+		while (current->next != NULL && temp->mark < current->next->mark)
 		{
 			current = current->next;
 		}
@@ -151,6 +155,8 @@ void AddMarksItem(Student* head, int index)
 		}
 
 	}
+
+	return head;
 }
 
 //***************************************
@@ -158,13 +164,11 @@ void AddMarksItem(Student* head, int index)
 //***************************************
 void PrintList(Student* head)
 {
-	Student* temp = head;
-
 	printf("\nListing all values:\n");
-	while (temp != NULL)
+	while (head != NULL)
 	{
-		printf("Name: %s, ID: %d, Mark: %d\n", temp->name, temp->ID, temp->mark);
-		temp = temp->next;
+		printf("Name: %s, ID: %d, Mark: %d\n", head->name, head->ID, head->mark);
+		head = head->next;
 	}
 }
 
@@ -173,25 +177,18 @@ void PrintList(Student* head)
 //***************************************
 void PrintStudent(Student* head, int ID)
 {
-	Student* temp = head;
 	int rank = 0;
-
-	//find student
-	while (temp->ID != ID && temp != NULL);
+	while (head != NULL)
 	{
-		temp = temp->next;
+		if (head->ID == ID)
+		{
+			printf("\nStudent:\n");
+			printf("Name: %s, Mark: %d, Rank: %d,\n", head->name, head->mark, rank);
+		}
+		
+		head = head->next;
+
 		rank++;
-	}
-
-	//found student
-	if (temp->ID == ID)
-	{
-		printf("\nStudent:\n");
-		printf("Name: %s, Mark: %d, Rank: %d,\n", temp->name, temp->mark, rank);
-	}
-	else
-	{
-		printf("\nStudent not found!\n");
 	}
 }
 
@@ -200,14 +197,17 @@ void PrintStudent(Student* head, int ID)
 //***************************************
 void PrintListMarkThreshold(Student* head, int value)
 {
-	Student* temp = head;
-
 	printf("\nStudents above threshold:\n");
 
-	//print values
-	while (temp->mark > value && temp != NULL);
+	while (head != NULL && head->mark > value)
 	{
-		temp = temp->next;
-		printf("Name: %s, Mark: %d\n", temp->name, temp->mark);
+		printf("Name: %s, Mark: %d\n", head->name, head->mark);
+		head = head->next;
 	}
+	//print values
+	//while (head->mark > value && head != NULL);
+	//{
+		//printf("Name: %s, Mark: %d\n", head->name, head->mark);
+		//head = head->next;
+	//}
 }
