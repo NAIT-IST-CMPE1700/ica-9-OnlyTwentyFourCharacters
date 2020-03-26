@@ -191,7 +191,7 @@ void PrintStudent(Student* head, int ID)
 
 		rank++;
 	}
-	printf("No student with that ID.");
+	printf("\nNo student with that ID.\n");
 }
 
 //***************************************
