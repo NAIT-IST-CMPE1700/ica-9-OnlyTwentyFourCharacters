@@ -184,12 +184,14 @@ void PrintStudent(Student* head, int ID)
 		{
 			printf("\nStudent:\n");
 			printf("Name: %s, Mark: %d, Rank: %d,\n", head->name, head->mark, rank);
+			return;
 		}
 		
 		head = head->next;
 
 		rank++;
 	}
+	printf("No student with that ID.");
 }
 
 //***************************************
@@ -204,10 +206,4 @@ void PrintListMarkThreshold(Student* head, int value)
 		printf("Name: %s, Mark: %d\n", head->name, head->mark);
 		head = head->next;
 	}
-	//print values
-	//while (head->mark > value && head != NULL);
-	//{
-		//printf("Name: %s, Mark: %d\n", head->name, head->mark);
-		//head = head->next;
-	//}
 }
