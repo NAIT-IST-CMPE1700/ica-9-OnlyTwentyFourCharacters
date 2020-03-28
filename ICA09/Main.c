@@ -51,5 +51,9 @@ int main(int argc, char** argv)
 	} while (userChoice != 5);
 	//loop until exit
 	
+	//clean up toys
+	FreeListMemory(IDHead);
+	FreeListMemory(MarksHead);
+
 	exit(EXIT_SUCCESS);
 }

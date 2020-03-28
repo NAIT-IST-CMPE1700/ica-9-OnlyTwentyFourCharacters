@@ -207,3 +207,18 @@ void PrintListMarkThreshold(Student* head, int value)
 		head = head->next;
 	}
 }
+
+//***************************************
+//Free the memory associated with a list
+//***************************************
+void FreeListMemory(Student* head)
+{
+	Student* next; //temp storage
+
+	while (head != NULL)
+	{
+		next = head->next;
+		free(head);
+		head = next;
+	}
+}
